@@ -16,16 +16,26 @@ class HomePage extends StatelessWidget {
         body: BlocConsumer<CounterCubit, CounterState>(
             // Bloc Consumer - has builder (UI thats being rebuild after the state is changed), listener (Logics to perform when the state changes)
             builder: ((context, state) {
+          // UI to be rebuild when the state changes
           return Center(
               child: Text(
             state.counterValue.toString(),
             style: const TextStyle(fontSize: 28),
           ));
         }), listener: ((context, state) {
+          // Logics to perform when the state changes
           if (state.wasIncremented == true) {
-            print('value was incremented');
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('value was incremented'),
+              ),
+            );
           } else {
-            print('value was decremented');
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('value was decremented'),
+              ),
+            );
           }
         })),
         floatingActionButton: Column(
